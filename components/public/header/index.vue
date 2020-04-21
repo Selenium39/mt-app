@@ -1,25 +1,24 @@
 <template>
   <div>
-    <el-row :gutter="15">
-      <el-col :span="6">
-        <city />
+    <el-row>
+      <el-col>
+        <topbar />
       </el-col>
-      <el-col :span="6">
-        <user />
-      </el-col>
-      <el-col :span="6">
-        <div class="grid-content bg-purple"></div>
+    </el-row>
+    <el-row>
+      <el-col>
+        <search />
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
-import City from "./city";
-import User from "./user";
+import Topbar from "./topbar";
+import Search from "./search";
 export default {
   components: {
-    City,
-    User
+    Topbar,
+    Search
   }
 };
 </script>

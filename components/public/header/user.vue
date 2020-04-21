@@ -5,7 +5,7 @@
       <nuxt-link to="/exit">退出</nuxt-link>
     </template>
     <template v-else>
-      <nuxt-link to="/login">登录</nuxt-link>
+      <nuxt-link style="color:#FE8C00;margin-right:10px" to="/login">立即登录</nuxt-link>
       <nuxt-link to="/register">注册</nuxt-link>
     </template>
   </div>
@@ -20,6 +20,13 @@ export default {
   }
 };
 </script>
-
 <style>
+.c-user{
+  margin-top: 20px;
+  margin-left: 150px;
+  height:60px;
+}
+.c-user a{
+  color: #909399;
+}
 </style>
