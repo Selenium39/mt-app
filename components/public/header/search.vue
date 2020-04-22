@@ -14,14 +14,21 @@
         >
           <el-button slot="append" icon="el-icon-search" id="search" @click="searchHandler"></el-button>
         </el-input>
-        <el-card v-if="isSearch" class="box-card" id="search-box">
+        <el-card
+          @mouseenter="enterSearchBoxHanlder"
+          v-if="isSearch"
+          class="box-card"
+          id="search-box"
+        >
           <dl v-if="isHistorySearch">
             <dt class="search-title" v-show="history">历史搜索</dt>
+            <dt class="remove-history" v-show="history" @click="removeAllHistory"><i class="el-icon-delete"></i>清空历史记录</dt>
             <el-tag
               v-for="search in historySearchList"
-              :key="search.name"
+              :key="search.id"
               closable
               :type="search.type"
+              @close="closeHandler(search)"
               style="margin-right:5px; margin-bottom:5px;"
             >{{search.name}}</el-tag>
             <dt class="search-title">热门搜索</dt>
@@ -59,7 +66,13 @@ export default {
       this.history = this.historySearchList.length == 0 ? false : true;
     },
     blur() {
-      this.isFocus = false;
+      var self = this;
+      this.searchBoxTimeout = setTimeout(function() {
+        self.isFocus = false;
+      }, 300);
+    },
+    enterSearchBoxHanlder() {
+      clearTimeout(this.searchBoxTimeout);
     },
     searchHandler() {
       //随机生成搜索历史tag式样
@@ -76,6 +89,17 @@ export default {
         Store.saveHistory(this.historySearchList);
       }
       this.history = this.historySearchList.length == 0 ? false : true;
+    },
+    closeHandler(search) {
+      this.historySearchList.splice(this.historySearchList.indexOf(search), 1);
+      Store.saveHistory(this.historySearchList);
+      clearTimeout(this.searchBoxTimeout);
+      if (this.historySearchList.length == 0) {
+        this.history = false;
+      }
+    },
+    removeAllHistory(){
+       Store.removeAllHistory();
     }
   },
   computed: {
@@ -108,6 +132,12 @@ export default {
   color: #bdbaba;
   font-size: 15px;
   margin-bottom: 5px;
+}
+.remove-history{
+   color: #bdbaba;
+  font-size: 15px;
+  float:right;
+  margin-top: -22px; 
 }
 #search-box {
   width: 555px;

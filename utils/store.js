@@ -10,6 +10,9 @@ Store.saveHistory = (arr) => {
 
 Store.loadHistory = () =>JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
 
+Store.removeAllHistory=()=>{localStorage.removeItem(LOCAL_STORAGE_KEY)}
+
+
 module.exports = Store
 
 
