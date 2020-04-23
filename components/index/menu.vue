@@ -20,7 +20,8 @@
         </el-col>
       </el-row>
     </div>
-    <el-card v-if="flag" class="card" @mouseenter.native="enterCard" @mouseleave.native="leaveCard">
+    <!---设置z-index优先级,防止被走马灯效果遮挡-->
+    <el-card v-if="flag" class="card" @mouseenter.native="enterCard" @mouseleave.native="leaveCard"  style="position:relative;z-index:10">
       <div slot="header" class="clearfix">
         <span style="font-size:15px">{{currentCategoryName}}</span>
         <el-button style="float: right; padding: 3px 0" type="text">

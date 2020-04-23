@@ -14,15 +14,19 @@
         >
           <el-button slot="append" icon="el-icon-search" id="search" @click="searchHandler"></el-button>
         </el-input>
+        <!---设置z-index优先级,防止被走马灯效果遮挡-->
         <el-card
           @mouseenter="enterSearchBoxHanlder"
           v-if="isSearch"
           class="box-card"
           id="search-box"
+          style="position:relative;z-index:15"
         >
           <dl v-if="isHistorySearch">
             <dt class="search-title" v-show="history">历史搜索</dt>
-            <dt class="remove-history" v-show="history" @click="removeAllHistory"><i class="el-icon-delete"></i>清空历史记录</dt>
+            <dt class="remove-history" v-show="history" @click="removeAllHistory">
+              <i class="el-icon-delete"></i>清空历史记录
+            </dt>
             <el-tag
               v-for="search in historySearchList"
               :key="search.id"
@@ -98,8 +102,8 @@ export default {
         this.history = false;
       }
     },
-    removeAllHistory(){
-       Store.removeAllHistory();
+    removeAllHistory() {
+      Store.removeAllHistory();
     }
   },
   computed: {
@@ -133,16 +137,16 @@ export default {
   font-size: 15px;
   margin-bottom: 5px;
 }
-.remove-history{
-   color: #bdbaba;
+.remove-history {
+  color: #bdbaba;
   font-size: 15px;
-  float:right;
-  margin-top: -22px; 
+  float: right;
+  margin-top: -22px;
 }
 #search-box {
   width: 555px;
-  height:300px;
-  margin-top: -20px;
+  height: 300px;
+  margin-top: 0px;
   padding-bottom: 20px;
 }
 </style>
