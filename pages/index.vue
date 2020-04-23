@@ -4,8 +4,8 @@
       <el-col :span="5">
           <emenu></emenu>
       </el-col>
-      <el-col :span="5">222</el-col>
-      <el-col :span="5">333</el-col>
+      <el-col :span="5"></el-col>
+      <el-col :span="5"></el-col>
     </el-row>
   </div>
 </template>

@@ -141,6 +141,7 @@ export default {
 }
 #search-box {
   width: 555px;
+  height:300px;
   margin-top: -20px;
   padding-bottom: 20px;
 }
