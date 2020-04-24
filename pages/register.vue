@@ -18,13 +18,15 @@
       </el-header>
       <el-main>
         <div style="width:500px;margin:0 auto;">
-          <el-form :model="registerForm" :rules="rules" label-width="90px">
+          <el-form :model="registerForm" ref="registerForm" :rules="rules" label-width="100px">
             <el-form-item label="昵称" prop="nickname">
               <el-input v-model="registerForm.nickname"></el-input>
             </el-form-item>
             <el-form-item label="邮箱" prop="email">
               <el-input v-model="registerForm.email"></el-input>
-              <el-button type="info" style="margin-top:10px;">获取邮箱验证码</el-button>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="info">获取邮箱验证码</el-button>
               <span>{{statusMsg}}</span>
             </el-form-item>
             <el-form-item label="邮箱验证码" prop="emailCode">
@@ -40,7 +42,7 @@
               <el-input v-model="registerForm.password1"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="warning">注册</el-button>
+              <el-button type="warning" @click="registerHandler('registerForm')">注册</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -61,6 +63,17 @@ export default {
   },
   //在page中通过layout指定布局,如果不指定布局，则使用default.vue
   layout: "blank",
+  methods: {
+    //点击注册按钮统一做校验
+    registerHandler(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          //校验通过
+        } else {
+        }
+      });
+    }
+  },
   data() {
     return {
       statusMsg: "",
@@ -92,6 +105,7 @@ export default {
           {
             required: true,
             type: "string",
+            message: "请输入验证码",
             trigger: "blur"
           }
         ],
@@ -102,8 +116,8 @@ export default {
             trigger: "blur"
           }
         ],
-        passowrd1: [
-          { required: true, message: "确认密码", trigger: "blur" },
+        password1: [
+          { required: true, message: "请输入确认密码", trigger: "blur" },
           {
             validator: (rule, value, cb) => {
               if (value === "") {
